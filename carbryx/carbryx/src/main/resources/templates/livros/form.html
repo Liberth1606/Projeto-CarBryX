@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${livro.id != null ? 'Editar Livro' : 'Novo Livro'} + ' — CarBryX'">
+        Livro — CarBryX
+    </title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" th:href="@{/}">
+        <div class="brand-icon">CBX</div>
+        <span class="brand-name">Car<span>Bry-X</span></span>
+    </a>
+    <ul class="nav-links">
+        <li><a th:href="@{/}">&#8962; Home</a></li>
+        <li><a th:href="@{/view/livros}">&#9783; Acervo</a></li>
+        <li><a th:href="@{/view/livros/novo}" class="active">&#43; Novo Livro</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+
+    <nav class="breadcrumb">
+        <a th:href="@{/}">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a th:href="@{/view/livros}">Acervo</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current"
+              th:text="${livro.id != null ? 'Editar #' + livro.id : 'Novo Livro'}">
+        </span>
+    </nav>
+
+    <div class="page-header animate-in">
+        <div class="page-header-left">
+            <p class="page-eyebrow" th:text="${livro.id != null ? 'Editar registro' : 'Novo registro'}"></p>
+            <h1 class="page-title" th:text="${livro.id != null ? 'Editar Livro' : 'Cadastrar Livro'}"></h1>
+            <p class="page-subtitle"
+               th:text="${livro.id != null}
+                   ? 'Atualize as informações do título abaixo.'
+                   : 'Preencha os campos para adicionar um novo título ao acervo.'">
+            </p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div th:if="${erro}" class="alert alert-danger animate-in">
+        &#9888;&nbsp; <span th:text="${erro}"></span>
+    </div>
+
+    <div class="card animate-in">
+
+        <div class="card-header">
+            <div class="card-header-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            <span class="card-header-title"
+                  th:text="${livro.id != null ? 'Edição — ID ' + livro.id : 'Novo Título'}">
+            </span>
+        </div>
+
+        <form th:action="${livro.id != null}
+                    ? @{/view/livros/{id}(id=${livro.id})}
+                    : @{/view/livros}"
+              th:object="${livro}"
+              method="post"
+              novalidate>
+
+            <div class="card-body">
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="titulo">Título <span class="required">*</span></label>
+                        <input type="text" id="titulo" th:field="*{titulo}"
+                               placeholder="Ex: Clean Code" required/>
+                        <span class="field-hint">Obrigatório. Nome completo do livro.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="autor">Autor <span class="required">*</span></label>
+                        <input type="text" id="autor" th:field="*{autor}"
+                               placeholder="Ex: Robert C. Martin" required/>
+                        <span class="field-hint">Obrigatório.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editora">Editora</label>
+                        <input type="text" id="editora" th:field="*{editora}"
+                               placeholder="Ex: Prentice Hall"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ano">Ano de Publicação</label>
+                        <input type="number" id="ano" th:field="*{ano}"
+                               placeholder="Ex: 2008" min="1" max="2099"/>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" th:field="*{descricao}"
+                                  placeholder="Breve descrição do livro, sinopse ou observações…"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a class="btn btn-outline" th:href="@{/view/livros}">
+                    &#8592; Cancelar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <svg width="14" height="14" fill="none" stroke="currentColor"
+                         stroke-width="2.5" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span th:text="${livro.id != null ? 'Salvar Alterações' : 'Cadastrar Livro'}">Salvar</span>
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <p style="margin-top:1rem; font-size:0.78rem; color:var(--text-3);">
+        <span style="color:var(--accent)">*</span> Campos obrigatórios
+    </p>
+
+</main>
+
+<footer>
+    &copy; 2025 Grupo CBX &mdash; Todos os direitos reservados
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CarBryX — Gestão de Livros</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" th:href="@{/}">
+        <div class="brand-icon">CBX</div>
+        <span class="brand-name">Car<span>Bry-X</span></span>
+    </a>
+    <ul class="nav-links">
+        <li><a th:href="@{/}" class="active">&#8962; Home</a></li>
+        <li><a th:href="@{/view/livros}">&#9783; Acervo</a></li>
+        <li><a th:href="@{/view/livros/novo}">&#43; Novo Livro</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Sistema de Gestão de Livros
+        </div>
+
+        <h1 class="hero-title">
+            <span class="dim">Bem&#8209;vindo ao</span><br/>
+            <span class="accent">Car</span>Bry-X
+        </h1>
+
+        <p class="hero-sub">
+            Gerencie seu acervo de livros com eficiência.
+            Cadastre, edite e organize títulos, autores e editoras
+            em uma interface simples e agradável.
+        </p>
+
+        <div class="hero-actions">
+            <a class="btn btn-primary" th:href="@{/view/livros/novo}">
+                &#43;&nbsp; Cadastrar Livro
+            </a>
+            <a class="btn btn-outline" th:href="@{/view/livros}">
+                Ver Acervo &rarr;
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    &copy; 2025 Grupo CBX &mdash; Todos os direitos reservados
+</footer>
+
+</body>
+</html>
